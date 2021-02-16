@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="card mt-3">
+      <div class="card-header">
+          <div class="float-left">
+              <h4>Clients</h4>
+          </div>
+          <div class="float-right">
+              <div class="row">
+                  <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="firstName" [(ngModel)]="firstName" (input)="searchPacient()">
+                    <button type="button" class="btn btn-outline-primary mr-2" routerLink="new">New Client</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+      <div class="card-body">
+          <table class="table table-hover">
+              <thead>
+                  <tr>
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>Cpf</th>
+                      <th>Date Inclusion</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let client of clients">
+                      <td>{{ client.idClient }}</td>
+                      <td>{{ client.name}}</td>
+                      <td>{{ client.cpf}}</td>
+                      <td>{{ client.dt_inc }}</td>
+                      <td>
+                          <span class="float-right">
+
+                              <button class="btn btn-outline-primary mb-1 btn-sm mr-2" (click)="onEdit(client.idClient)">
+                                  Atualizar
+                              </button>
+
+                              <button class="btn btn-outline-danger mb-1 btn-sm" (click)="deleteClient(client.idClient)">
+                                  Remover
+                              </button>
+
+                          </span>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="container-body">
+    <div class="container-middle">
+        <h1 class="title-login">Crud</h1>
+
+        <div class="container-login">
+            <div class="container-login-inside">
+                <div class="title">LOGIN</div>
+
+                <form [formGroup]="form">
+                    <div class="mb-3">
+                        <label for="user" class="form-label">Username</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img src="../../../assets/person-circle.svg" alt="User person">
+                            </span>
+                            <input type="text" class="form-control" id="user" placeholder="Your username" formControlName="user"
+                            [ngClass]="{ 'is-invalid': submitted && hasError('user') }">
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text password" id="basic-addon1" (click)="changePasswordView()">
+                                <img src="../../../assets/eye-fill.svg" alt="User person" *ngIf="this.showPassword">
+                                <img src="../../../assets/eye-slash-fill.svg" alt="User person" *ngIf="!this.showPassword">
+                            </span>
+                            <input [type]="this.showPassword ? 'text' : 'password'" class="form-control" id="password" placeholder="**********" formControlName="password"
+                            [ngClass]="{ 'is-invalid': submitted && hasError('password') }">
+                        </div>
+                        
+                        
+                      </div>
+
+                      <button type="button" class="btn btn-primary col-sm-12" routerLink="/client" (click)="verifyLogin()">Log in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

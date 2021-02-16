@@ -1,0 +1,17 @@
+.navbar{
+    background-color: #CD8DE5;
+}
+
+.logout-link{
+    text-decoration: none;
+    color: rgba(0,0,0,.5);
+    transition: .1s;
+}
+
+.logout-link:hover{
+    color: rgba(0,0,0,.7);;
+}
+
+a{
+    cursor: pointer;
+}

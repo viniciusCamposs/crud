@@ -1,1 +1,70 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #F7F9FB;
+    font-family: 'Poppins', sans-serif;
+}
+
+.title{
+    color: #CD8DE5;
+    text-transform: uppercase;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.btn:focus{
+    box-shadow: none !important;
+}
+
+.form-control:focus{
+    box-shadow: none !important;
+    border-color: #CD8DE5 !important;
+}
+
+.btn-primary{
+    background-color: #CD8DE5;
+    border: none;
+}
+
+.btn-primary:hover{
+    background-color: #A86CC1 !important;
+}
+
+.btn-primary:focus {
+    background-color: #A86CC1 !important;
+}
+
+.btn-primary:active{
+    background-color: #A86CC1 !important;
+}
+
+.btn-outline-primary{
+    border-color:#CD8DE5;
+    background-color: transparent;
+    transition: 2.s;
+    color: #CD8DE5;
+}
+
+.btn-outline-primary:hover{
+    border-color: #CD8DE5;
+    background-color: #CD8DE5;
+    color: white;
+}
+
+.btn-outline-primary:focus{
+    background-color: #A86CC1 !important;
+    border-color: #A86CC1 !important;
+    color: white;
+}
+
+
+

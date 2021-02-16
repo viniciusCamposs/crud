@@ -1,0 +1,13 @@
+<div
+  class="alert alert-{{ type }} no-margin alert-dismissible fade show"
+  role="alert"
+>
+  {{ message }}
+  <button
+    type="button"
+    class="btn-close margin-top"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+    (click)="onClose()"
+  ></button>
+</div>

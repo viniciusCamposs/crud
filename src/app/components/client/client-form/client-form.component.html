@@ -1,0 +1,239 @@
+<div class="container">
+    <form class="row g-3 needs-validation border p-3 mt-3" [formGroup]="form">
+
+        <div class="title">Personal informations</div>
+
+        <div class="form-row">
+            <div class="col-md-12">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name"
+                    [ngClass]="{ 'is-invalid': submitted && hasError('name') }" />
+                <div class="invalid-feedback" *ngIf="hasError('name') && hasError('name')!['required']">
+                    Please enter a name.
+                </div>
+                <div class="invalid-feedback" *ngIf="hasError('name')! && hasError('name')!['minlength']">
+                    The name must be longer than 3 characters.
+                </div>
+                <div class="invalid-feedback" *ngIf="hasError('name')! && hasError('name')!['maxlength']">
+                    The name must be less than 70 characters.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-12">
+                <label for="cpf" class="form-label mt-3">Cpf</label>
+                <input type="text" class="form-control" id="cpf" placeholder="Cpf" formControlName="cpf"
+                    [ngClass]="{ 'is-invalid': submitted && hasError('cpf') }"/>
+                <div class="invalid-feedback" *ngIf="hasError('cpf') && hasError('cpf')!['required']">
+                    Please enter a cpf.
+                </div>
+                <div class="invalid-feedback" *ngIf="hasError('cpf') && hasError('cpf')!['minlength']">
+                    Cpf must be longer than 11 characters.
+                </div>
+                <div class="invalid-feedback" *ngIf="hasError('cpf') && hasError('cpf')!['maxlength']">
+                    The cpf must be less than 11 characters.
+                </div>
+            </div>
+        </div>
+
+        <div class="title">Addres</div>
+
+        <div class="adress" formArrayName="adresses"
+            *ngFor="let adress of getAdressFormGroup().controls; let i = index;">
+            <div [formGroupName]="i">
+                <div class="form-row">
+                    <div class="col-md-1">
+                        <label for="idAdress" class="form-label mt-3">Id</label>
+                        <input type="text" class="form-control" id="idAdress" formControlName="idAdress" readonly/>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="cep" class="form-label mt-3">Cep</label>
+                        <input type="text" class="form-control" id="cep" placeholder="Cep"
+                            formControlName="cep" [ngClass]="{ 'is-invalid': submitted && hasErrorInFormArray(adress, 'cep') }" (blur)="verifyCep(i)"/>
+                        <div class="invalid-feedback" *ngIf="hasErrorInFormArray(adress, 'cep') && hasErrorInFormArray(adress, 'cep')!['required']">
+                            Please enter a cep.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="hasErrorInFormArray(adress, 'cep') && hasErrorInFormArray(adress, 'cep')!['minlength']">
+                            Cep must be longer than 8 characters.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="hasErrorInFormArray(adress, 'cep') && hasErrorInFormArray(adress, 'cep')!['maxlength']">
+                            The cep must be less than 8 characters.
+                        </div>
+                    </div>
+            
+                    <div class="col-md-3">
+                        <label for="number" class="form-label mt-3">Number</label>
+                        <input type="text" class="form-control" id="number" placeholder="Number"
+                            formControlName="number" [ngClass]="{ 'is-invalid': submitted && hasErrorInFormArray(adress, 'number') }" />
+                        <div class="invalid-feedback" *ngIf="hasErrorInFormArray(adress, 'number') && hasErrorInFormArray(adress, 'number')!['required']">
+                            Please enter a number.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="hasErrorInFormArray(adress, 'number') && hasErrorInFormArray(adress, 'number')!['maxlength']">
+                            The number must be less than 10 characters.
+                        </div>
+                    </div>
+            
+                    <div class="col-md-5">
+                        <label for="complement" class="form-label mt-3">Complement</label>
+                        <input type="text" class="form-control" id="complement" placeholder="Complement"
+                            formControlName="complement"/>
+                    </div>
+                </div>
+            
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <label for="street" class="form-label mt-3">Street</label>
+                        <input type="text" class="form-control" id="street" placeholder="Street"
+                            formControlName="street" [ngClass]="{ 'is-invalid': submitted && hasErrorInFormArray(adress, 'street') }" />
+                        <div class="invalid-feedback" *ngIf="hasErrorInFormArray(adress, 'street') && hasErrorInFormArray(adress, 'street')!['required']">
+                            Please enter a street.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="hasErrorInFormArray(adress, 'street') && hasErrorInFormArray(adress, 'street')!['minlength']">
+                            Street must be longer than 10 characters.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="hasErrorInFormArray(adress, 'street') && hasErrorInFormArray(adress, 'street')!['maxlength']">
+                            The street must be less than 100 characters.
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label for="neighborhood" class="form-label mt-3">Neighborhood</label>
+                        <input type="text" class="form-control" id="neighborhood" placeholder="neighborhood"
+                            formControlName="neighborhood"
+                            [ngClass]="{ 'is-invalid': submitted && hasErrorInFormArray(adress, 'neighborhood') }" />
+                        <div class="invalid-feedback"
+                            *ngIf="hasErrorInFormArray(adress, 'neighborhood') && hasErrorInFormArray(adress, 'neighborhood')!['required']">
+                            Please enter a neighborhood.
+                        </div>
+                        <div class="invalid-feedback"
+                            *ngIf="hasErrorInFormArray(adress, 'neighborhood') && hasErrorInFormArray(adress, 'neighborhood')!['minlength']">
+                            Neighborhood must be longer than 5 characters.
+                        </div>
+                        <div class="invalid-feedback"
+                            *ngIf="hasErrorInFormArray(adress, 'neighborhood') && hasErrorInFormArray(adress, 'neighborhood')!['maxlength']">
+                            The neighborhood must be less than 100 characters.
+                        </div>
+                    </div>
+            
+                    <div class="col-md-4">
+                        <label for="city" class="form-label mt-3">City</label>
+                        <input type="text" class="form-control" id="city" placeholder="City" formControlName="city"
+                            [ngClass]="{ 'is-invalid': submitted && hasErrorInFormArray(adress, 'city') }" />
+                        <div class="invalid-feedback" *ngIf="hasErrorInFormArray(adress, 'city') && hasErrorInFormArray(adress, 'city')!['required']">
+                            Please enter a city.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="hasErrorInFormArray(adress, 'city') && hasErrorInFormArray(adress, 'city')!['minlength']">
+                            City must be longer than 5 characters.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="hasErrorInFormArray(adress, 'city') && hasErrorInFormArray(adress, 'city')!['maxlength']">
+                            The city must be less than 100 characters.
+                        </div>
+                    </div>
+            
+            
+                    <div class="col-md-4">
+                        <label for="state" class="form-label mt-3">State</label>
+                        <input type="text" class="form-control" id="state" placeholder="State" formControlName="state"
+                            [ngClass]="{ 'is-invalid': submitted && hasErrorInFormArray(adress, 'state') }" />
+                        <div class="invalid-feedback" *ngIf="hasErrorInFormArray(adress, 'state') && hasErrorInFormArray(adress, 'state')!['required']">
+                            Please enter a state.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="hasErrorInFormArray(adress, 'state') && hasErrorInFormArray(adress, 'state')!['minlength']">
+                            State must be longer than 4 characters.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="hasErrorInFormArray(adress, 'state') && hasErrorInFormArray(adress, 'state')!['maxlength']">
+                            The state must be less than 30 characters.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row mt-1">
+                <div class="col-md-12">
+                    <button class="btn btn-danger float-right" (click)="deleteAdressInForm(i)" *ngIf="i!=0">-</button>
+                    <button class="btn btn-success float-right mr-2" (click)="addAdressInForm()">+</button>
+                </div>
+            </div>
+            
+
+        </div>
+
+        <div class="title">Telephone</div>
+
+        <div class="telephone"
+        formArrayName="telephones"
+        *ngFor="let telephone of getTelephoneFormGroup().controls;  let i = index;">
+        <div class="form-row" [formGroupName]="i">
+            <div class="col-md-3">
+                <label for="ddd" class="form-label mt-3">DDD</label>
+                <input type="text" class="form-control" id="ddd" placeholder="DDD" 
+                [ngClass]="{ 'is-invalid': submitted && hasErrorInFormArray(telephone, 'ddd') }" 
+                formControlName="ddd"/>
+                <div class="invalid-feedback" *ngIf="hasErrorInFormArray(telephone, 'ddd') && hasErrorInFormArray(telephone, 'ddd')!['required']">
+                    Please enter a ddd.
+                </div>
+                <div class="invalid-feedback" *ngIf="hasErrorInFormArray(telephone, 'ddd') && hasErrorInFormArray(telephone, 'ddd')!['minlength']">
+                    DDD must be longer than 2 characters.
+                </div>
+                <div class="invalid-feedback" *ngIf="hasErrorInFormArray(telephone, 'ddd') && hasErrorInFormArray(telephone, 'ddd')!['maxlength']">
+                    The ddd must be less than 2 characters.
+                </div>
+            </div>
+    
+            <div class="col-md-6">
+                <label for="telNumber" class="form-label mt-3">Number</label>
+                <input type="text" class="form-control" id="telNumber" placeholder="Number"
+                    formControlName="telNumber" [ngClass]="{ 'is-invalid': submitted && hasErrorInFormArray(telephone, 'telNumber') }" />
+                <div class="invalid-feedback" *ngIf="hasErrorInFormArray(telephone, 'telNumber') && hasErrorInFormArray(telephone, 'telNumber')!['required']">
+                    Please enter a number.
+                </div>
+                <div class="invalid-feedback" *ngIf="hasErrorInFormArray(telephone, 'telNumber') && hasErrorInFormArray(telephone, 'telNumber')!['minlength']">
+                    Number must be longer than 9 characters.
+                </div>
+                <div class="invalid-feedback" *ngIf="hasErrorInFormArray(telephone, 'telNumber') && hasErrorInFormArray(telephone, 'telNumber')!['maxlength']">
+                    The number must be less than 9 characters.
+                </div>
+            </div>
+        
+            <div class="col-md-3">
+                <label for="type" class="form-label mt-3">Type</label>
+                <input type="text" class="form-control" id="type" placeholder="Type" formControlName="type"
+                    [ngClass]="{ 'is-invalid': submitted && hasErrorInFormArray(telephone, 'type') }" />
+
+                <div class="invalid-feedback" *ngIf="hasErrorInFormArray(telephone, 'type') && hasErrorInFormArray(telephone, 'type')!['required']">
+                    Please enter a type.
+                </div>
+                <div class="invalid-feedback" *ngIf="hasErrorInFormArray(telephone, 'type') && hasErrorInFormArray(telephone, 'type')!['minlength']">
+                    Type must be longer than 3 characters.
+                </div>
+                <div class="invalid-feedback" *ngIf="hasErrorInFormArray(telephone, 'type') && hasErrorInFormArray(telephone, 'type')!['maxlength']">
+                    The type must be less than 3 characters.
+                </div>
+            </div>
+        </div>
+ 
+            <div class="form-row mt-1">
+                <div class="col-md-12">
+                    <button class="btn btn-danger float-right" (click)="deleteTelephoneInForm(i)" *ngIf="i!=0">-</button>
+                    <button class="btn btn-success float-right mr-2" (click)="addTelephoneInForm()">+</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="d-grid gap-2">
+            <button class="btn btn-outline-primary mt-2" (click)=" verifyIfCpfIsValid()">
+                Enviar
+            </button>
+
+            <button class="btn btn-outline-danger mt-2" (click)="onCancel()">
+                Cancelar
+            </button>
+        </div>
+
+    </form>
+</div>
